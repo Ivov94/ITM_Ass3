@@ -1,4 +1,4 @@
 
-SET ANT_HOME=.\tools\ant\apache-ant-1.7.0
+SET ANT_HOME=.\tools\ant\apache-ant-1.9.6
 
 %ANT_HOME%/bin/ant %*
