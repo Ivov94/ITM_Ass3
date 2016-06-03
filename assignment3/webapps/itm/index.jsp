@@ -43,7 +43,8 @@
             for ( AbstractMedia medium : media ) {
                 c++;
                 %>
-                    <div style="width:300px;height:300px;padding:10px;float:left;">
+                    <div style="width:430px;height:430px;padding:10px;float:left;">
+
                 <%
             
                 // handle images
@@ -59,13 +60,22 @@
                     %>
                     <div style="width:200px;height:200px;padding:10px;">
                         <a href="media/img/<%= img.getInstance().getName()%>">
-                        <img src="media/md/<%= img.getInstance().getName() %>.thumb.png" border="0"/>
+                        <img src="media/md/<%= img.getInstance().getName() %>.thumb.png" border="0" 
+						/>
                         </a>
                     </div>
                     <div>
                         Name: <%= img.getName() %><br/>
                         Dimensions: <%= img.getWidth() %>x<%= img.getHeight() %>px<br/>
+                        <% if(img.getSize() != 0){  %>Size: <%= img.getSize() %> B (<%= img.getSize()/1024 %> kB)  <br/> <% } %>
+                        <% if(img.getComponentsNumber() != 0){  %> numComponents: <%= img.getComponentsNumber() %> <br/> <% } %>
+						numColorComponents: <%= img.getColorNumber() %> <br/>
+						transparency: <%= img.getTransparency() %>  <br/>
+						<% if(img.getPixelSize() != 0){  %> pixelSize: <%= img.getPixelSize() %>  <br/> <% } %>
+						orientation: <%= img.getOrientation() %>  <br/> 
+						colorSpaceType: <%= img.getColorSpaceType() %>  <br/>
                         Tags: <% for ( String t : img.getTags() ) { %><a href="tags.jsp?tag=<%= t %>"><%= t %></a> <% } %><br/>
+                        <a href="media/md/<%= img.getInstance().getName()%>.hist.png">Histogram</a>
                     </div>
                     <%  
                     } else 
@@ -116,6 +126,7 @@
                 <%
                     if ( c % 3 == 0 ) {
                 %>
+
                     <div style="clear:left"/>
                 <%
                         }
