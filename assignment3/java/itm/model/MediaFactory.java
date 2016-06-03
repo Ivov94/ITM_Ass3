@@ -7,6 +7,7 @@ package itm.model;
 
 import itm.audio.AudioMetadataGenerator;
 import itm.audio.AudioThumbGenerator;
+import itm.image.ImageHistogramGenerator;
 import itm.image.ImageMetadataGenerator;
 import itm.image.ImageThumbnailGenerator;
 import itm.video.VideoMetadataGenerator;
@@ -128,6 +129,10 @@ public class MediaFactory {
         ImageMetadataGenerator img = new ImageMetadataGenerator();
         ret.addAll(img.batchProcessImages(imageDir, metadataDir, false));
         
+		// Histogram
+		ImageHistogramGenerator histGenerator = new ImageHistogramGenerator();
+		histGenerator.batchProcessImages(imageDir, metadataDir, 256);
+        
         // step 2.1: create audio thumbnails (with a given length), do not
         // overwrite if not required
         AudioThumbGenerator atg = new AudioThumbGenerator(10);
@@ -145,6 +150,7 @@ public class MediaFactory {
         // step 3.2: create video metadata, do not overwrite if not required
         VideoMetadataGenerator vmg = new VideoMetadataGenerator();
         ret.addAll( vmg.batchProcessVideoFiles(videoDir, metadataDir, false) );
+		
         
         return ret;
     }
