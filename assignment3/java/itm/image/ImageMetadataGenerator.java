@@ -8,6 +8,8 @@ package itm.image;
 import itm.model.ImageMedia;
 import itm.model.MediaFactory;
 
+import java.awt.Color;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.io.File;
@@ -142,6 +144,13 @@ ImageReader reader;
         // add a tag corresponding to the filename extension of the file to the media 
         media.addTag(inputFormat);
         
+        //analyzing image, finding dominant color
+        ArrayList<String> domColors_tags = calcDominantColors(image);
+        for(String tag : domColors_tags){
+        	System.out.println("Adding domColors_tag: " + tag);
+        	media.addTag(tag);
+        }
+        
         // set orientation
         if(height>width){
         	media.setOrientation(ImageMedia.ORIENTATION_PORTRAIT);
@@ -178,7 +187,90 @@ ImageReader reader;
     }
     
         
-    /**
+    private ArrayList<String> calcDominantColors(BufferedImage image) {
+    	ArrayList<String> tags = new ArrayList<String>(1);
+    	
+    	ColorModel col_mod = image.getColorModel();
+    	long redCount = 0, blueCount = 0, greenCount = 0;
+    	
+    	try{
+    		
+			if (col_mod.getColorSpace().getType() == ColorSpace.TYPE_RGB){
+				for(int i = 0; i < image.getHeight(); i++){
+					for(int j = 0; j < image.getWidth(); j++){
+						// read the pixel values and extract the color information
+						Color color = new Color(image.getRGB(j, i));
+						
+						int redRetrieved = color.getRed();
+						int greenRetrieved = color.getGreen();
+						int blueRetrieved = color.getGreen();
+						
+						if(	(redRetrieved == 255 &&
+							greenRetrieved == 255 &&
+							blueRetrieved == 255) 
+								||
+							(redRetrieved == 0 &&
+							greenRetrieved == 0 &&
+							blueRetrieved == 0) )
+								continue;
+						
+						
+						redCount += color.getRed();
+						greenCount += color.getGreen();
+						blueCount += color.getBlue();
+						
+					}
+				}
+				
+				long blueORgreenMax = Math.max(blueCount, greenCount);
+				long max = Math.max(blueORgreenMax, redCount);
+				
+				//adding the most dominant color
+				if(max == blueCount)
+					tags.add("blue");
+				else
+					if(max == greenCount)
+						tags.add("green");
+					else 
+						tags.add("red");
+				
+				float redPerc = (max != redCount) ? redCount / (max / 100.0f) : - 1;
+				float bluePerc = (max != blueCount) ? blueCount / (max / 100.0f) : - 1;
+				float greenPerc = (max != greenCount) ? greenCount / (max / 100.0f) : -1;
+				
+				final float THRESHOLD = 10.0f;
+				//adding colors that are below the threshold
+				if(max != blueCount && 100.0f-bluePerc < THRESHOLD)
+					tags.add("blue");
+				else
+					if(max != greenCount && 100.0f-greenPerc < THRESHOLD)
+						tags.add("green");
+					else 
+						if(max != redCount && 100.0f-redPerc < THRESHOLD)
+						tags.add("red");
+				
+				
+				
+			} else if (col_mod.getColorSpace().getType() == ColorSpace.TYPE_GRAY){
+				//do nothing
+			} else
+					throw new Exception("Unsupported color space!");
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		return tags;
+	}
+
+
+	/**
         Main method. Parses the commandline parameters and prints usage information if required.
     */
     public static void main( String[] args ) throws Exception
