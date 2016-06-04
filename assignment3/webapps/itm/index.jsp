@@ -79,7 +79,6 @@
 						orientation: <%= img.getOrientation() %>  <br/> 
 						colorSpaceType: <%= img.getColorSpaceType() %>  <br/>
                         Tags: <% for ( String t : img.getTags() ) { %><a href="tags.jsp?tag=<%= t %>"><%= t %></a> <% } %><br/>
-                        <a href="media/md/<%= img.getInstance().getName()%>.hist.png">Histogram</a>
                     </div>
                     <%  
                     } else 

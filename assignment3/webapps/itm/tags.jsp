@@ -97,12 +97,16 @@
                 // display image thumbnail and metadata
                 ImageMedia img = (ImageMedia) medium;
                 %>
-                <div style="width:200px;height:200px;padding:10px;">
-                    <a href="media/img/<%= img.getInstance().getName()%>">
-                    <img src="media/md/<%= img.getInstance().getName() %>.thumb.png" border="0" 
-					/>
-                    </a>
-                </div>
+                    <div style="width:200px;height:200px;padding:10px;">
+	                    <div style="width: 700px; height: 200px;">
+	                        <a href="media/img/<%= img.getInstance().getName()%>">
+	                        	<img src="media/md/<%= img.getInstance().getName() %>.thumb.png" border="0" />
+	                        </a>
+	                         <a href="media/md/<%= img.getInstance().getName()%>.hist.png">
+	                        	<img src="media/md/<%= img.getInstance().getName()%>.hist.png" border="0" height="30%" width="30%"/>
+	                        </a>
+	                    </div>
+                    </div>
                 <div>
                     Name: <%= img.getName() %><br/>
                     Dimensions: <%= img.getWidth() %>x<%= img.getHeight() %>px<br/>
