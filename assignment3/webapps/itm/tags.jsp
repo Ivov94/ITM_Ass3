@@ -17,9 +17,6 @@
     <head>
     </head>
     <body>
-
-        
-        fill in your code here :)
         <%
         
             String paramTag = null;
