@@ -43,7 +43,7 @@
             for ( AbstractMedia medium : media ) {
                 c++;
                 %>
-                    <div style="width:430px;height:430px;padding:10px;float:left;">
+                    <div style="width:500px;height:500px;padding:10px;float:left;">
 
                 <%
             
@@ -93,7 +93,27 @@
                     </div>
                     <div>
                         Name: <%= audio.getName() %><br/>
-                        Duration: <%= audio.getDuration() %><br/>
+                        <% if(audio.getDurationMinS() != null){  %> Duration: <%= audio.getDurationMinS() %> [mm:ss] <br/> <% } %>
+                        <% if(audio.getSize() != 0){  %>Size: <%= audio.getSize() %> B (<%= audio.getSize()/1024 %> kB)  <br/> <% } %>
+                        <% if(audio.getAuthor() != null){  %> author: <%= audio.getAuthor() %>  <br/> <% } %>
+                        <% if(audio.getTitle() != null){  %> title: <%= audio.getTitle() %>  <br/> <% } %>
+                        <% if(audio.getCopyright() != null){  %> copyright: <%= audio.getCopyright() %>  <br/> <% } %>
+                        <% if(audio.getComment() != null){  %> comment: <%= audio.getComment() %>  <br/> <% } %>
+                        <% if(audio.getAlbum() != null){  %> album: <%= audio.getAlbum() %>  <br/> <% } %>
+                        <% if(audio.getDate() != null){  %> date: <%= audio.getDate() %>  <br/> <% } %>
+                        
+                        <% if(audio.getTrack() != null){  %> track: <%= audio.getTrack() %>  <br/> <% } %>
+                        <% if(audio.getComposer() != null){  %> composer: <%= audio.getComposer() %>  <br/> <% } %>
+                        <% if(audio.getGenre() != null){  %> genre: <%= audio.getGenre() %>  <br/> <% } %>
+
+                        <% if(audio.getEncoding() != null){  %> encoding: <%= audio.getEncoding() %>  <br/> <% } %>
+                        
+                        <% if(audio.getSampleRate() != null){  %> sampleRate: <%= audio.getSampleRate() %> Hz  <br/> <% } %>
+                        
+                        <% if(audio.getBitrate() != null){  %> bitrate: <%= audio.getBitrate() %> kb/s <br/> <% } %>
+                        <% if(audio.getChannels() != null){  %> channels: <%= audio.getChannels() %>  <br/> <% } %>
+                        
+                        
                         Tags: <% for ( String t : audio.getTags() ) { %><a href="tags.jsp?tag=<%= t %>"><%= t %></a> <% } %><br/>
                     </div>
                     <%  
@@ -115,6 +135,20 @@
                     </div>
                     <div>
                         Name: <a href="media/video/<%= video.getInstance().getName()%>"><%= video.getName() %></a><br/>
+                        Duration: <%= video.getVideoLength() %> seconds<br/>
+                        <% if(video.getSize() != 0){  %>Size: <%= video.getSize() %> B (<%= video.getSize()/1024 %> kB)  <br/> <% } %>
+                        <% if(video.getVideoCodec() != null){  %> videoCodec: <%= video.getVideoCodec() %>  <br/> <% } %>
+                        <% if(video.getVideoCodecID() != null){  %> videoCodecID: <%= video.getVideoCodecID() %>  <br/> <% } %>
+                        <% if(video.getVideoFrameRate() != null){  %> videoFrameRate: <%= video.getVideoFrameRate() %>  <br/> <% } %>
+                        <% if(video.getVideoHeight() != null){  %> videoHeight: <%= video.getVideoHeight() %>  <br/> <% } %>
+                        <% if(video.getVideoWidth() != null){  %> videoWidth: <%= video.getVideoWidth() %>  <br/> <% } %>
+                        
+                        <% if(video.getAudioCodec() != null){  %> audioCodec: <%= video.getAudioCodec() %>  <br/> <% } %>
+                        <% if(video.getVideoCodecID() != null){  %> audioCodecID: <%= video.getVideoCodecID() %>  <br/> <% } %>
+                        <% if(video.getAudioChannels() != null){  %> audioChannels: <%= video.getAudioChannels() %>  <br/> <% } %>
+                        <% if(video.getAudioSampleRate() != null){  %> audioSampleRate: <%= video.getAudioSampleRate() %> Hz  <br/> <% } %>
+                        <% if(video.getAudioBitRate() != null){  %> audioBitRate: <%= video.getAudioBitRate() %> kb/s <br/> <% } %>
+	
                         Tags: <% for ( String t : video.getTags() ) { %><a href="tags.jsp?tag=<%= t %>"><%= t %></a> <% } %><br/>
                     </div>
                     <%  
