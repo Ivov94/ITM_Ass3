@@ -1,0 +1,13 @@
+type: image
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\img\b17barb026_dithered.gif
+name: b17barb026_dithered.gif
+size: 323483 bytes (323kB)
+tags: image,gif,red,green,
+width: 1024
+height: 768
+numComponents: 3
+numColorComponents: 3
+transparency: 1
+pixelSize: 8
+orientation: 0
+colorSpaceType: TYPE_RGB

@@ -1,0 +1,16 @@
+type: audio
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\audio\Hombre.mp3
+name: Hombre.mp3
+size: 4844816 bytes (4844kB)
+tags: audio,
+duration: 04:02 (mm:ss)
+encoding: MPEG1L3
+sample rate: 44100.0
+channels: 2
+album: Arular
+author: M.I.A.
+composer: Maya Arulpragasam, Anthony Whiting
+title: Hombre
+track: 9/13
+date: 2005
+comment: TunNORM

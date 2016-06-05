@@ -1,0 +1,13 @@
+type: image
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\img\b17maartent1427.jpg
+name: b17maartent1427.jpg
+size: 580443 bytes (580kB)
+tags: image,jpg,green,blue,
+width: 1280
+height: 960
+numComponents: 3
+numColorComponents: 3
+transparency: 1
+pixelSize: 24
+orientation: 0
+colorSpaceType: TYPE_RGB

@@ -1,0 +1,19 @@
+type: video
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\video\panda.avi
+name: panda.avi
+size: 2473984 bytes (2473kB)
+tags: video,
+Videofields:
+Codec: CODEC_TYPE_VIDEO
+CodecID: CODEC_ID_CINEPAK
+Framerate: 25/1
+Length: 4
+Height: 288
+Width: 352
+
+Audiofields:
+Codec: CODEC_TYPE_AUDIO
+CodecID: CODEC_ID_MP3
+Channels: 2
+Samplerate: 44100
+Bitrate: 192000

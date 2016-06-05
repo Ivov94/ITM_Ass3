@@ -18,6 +18,7 @@
         <script type="text/javascript" src="js/dracula_graph.js"></script>
     </head>
     <body>
+    <p id="para">hi, i am here</p>
         <%
             // get the file paths - this is NOT good style (resources should be loaded via inputstreams...)
             // we use it here for the sake of simplicity.
@@ -37,21 +38,66 @@
             // ***************************************************************
             //  Fill in your code here!
             // ***************************************************************
-            
+            ArrayList<String> allTags = new ArrayList<String>();
         %>
         <div id="canvas" style="height: 1024px; width: 1024px; margin: auto; display: block; text-align:center;"></div>
         <script>
+        
+        	document.getElementById("para").innerHTML = 5 + 6;
+        
             var g = new Graph();
-            
-            // example
             g.addNode("Tags", "", "/itm/tags.jsp");
-            g.addEdge("Tags", "Image", "/itm/anImage.png")
-            
         <%
-            for ( AbstractMedia medium : media ) {
+        	for ( AbstractMedia medium : media ) {
+        		ArrayList<String> tagsInMedium = medium.getTags();
+        		for (String tag : tagsInMedium){
+        			if(!(allTags.contains(tag))){
+        				allTags.add(tag);
+        			}
+        		}
+            }
+        
+        	for(String tag : allTags){
+        		String tagURL = "/itm/tags.jsp?tag=" + tag;
         %>
-                g.addEdge(<% /* Source as string */  %>, <% /* Target as string */ %>, <% /* URL as string */ %>);
+            g.addNode("<%= tag %>", "", "<%= tagURL %>");
+            g.addEdge("Tags", "<%= tag %>", "");
         <%
+        	}
+        
+            for ( AbstractMedia medium : media ) {
+            	String mediumURL = "media";
+            	if(medium.getTags().contains("image")){
+            		mediumURL += "/img/";
+            	} else if(medium.getTags().contains("audio")){
+            		mediumURL += "/audio/";
+            	} else if(medium.getTags().contains("video")){
+            		mediumURL += "/video/";
+            	}
+            	mediumURL += medium.getName();
+        %>
+            	g.addNode("<%= medium.getName()  %>", "", "<%= mediumURL %>");
+    	<%	
+            	
+            	if(medium.getTags().isEmpty()){
+            		%>
+            		
+        			g.addEdge("<%= medium.getName()  %>", "Tags", "");
+        			
+					<%
+            	}
+            	else{
+	            	for(String tag : allTags){
+	            		if(medium.getTags().contains(tag)){
+
+        %>
+        		
+                			g.addEdge("<%= medium.getName()  %>", "<%= tag %>", "");
+        <%
+		
+						}
+            		}
+            	}
             }
         %>
             var layouter = new Graph.Layout.Spring(g);

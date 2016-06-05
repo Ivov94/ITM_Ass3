@@ -1,0 +1,16 @@
+type: audio
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\audio\Amazon.mp3
+name: Amazon.mp3
+size: 5136860 bytes (5136kB)
+tags: audio,
+duration: 04:17 (mm:ss)
+encoding: MPEG1L3
+sample rate: 44100.0
+channels: 2
+album: Arular
+author: M.I.A.
+composer: Maya Arulpragasam, Richard X.
+title: Amazon
+track: 7/13
+date: 2005
+comment: TunNORM

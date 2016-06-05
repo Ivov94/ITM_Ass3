@@ -1,0 +1,19 @@
+type: video
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\video\dutch.asf
+name: dutch.asf
+size: 537391 bytes (537kB)
+tags: video,
+Videofields:
+Codec: CODEC_TYPE_VIDEO
+CodecID: CODEC_ID_MSMPEG4V3
+Framerate: 251/6
+Length: 42
+Height: 176
+Width: 240
+
+Audiofields:
+Codec: CODEC_TYPE_AUDIO
+CodecID: CODEC_ID_WMAV2
+Channels: 1
+Samplerate: 16000
+Bitrate: 16000

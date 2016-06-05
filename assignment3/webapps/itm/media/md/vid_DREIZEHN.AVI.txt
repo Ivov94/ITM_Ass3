@@ -1,0 +1,19 @@
+type: video
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\video\DREIZEHN.AVI
+name: DREIZEHN.AVI
+size: 2655744 bytes (2655kB)
+tags: video,
+Videofields:
+Codec: CODEC_TYPE_VIDEO
+CodecID: CODEC_ID_INDEO3
+Framerate: 1000000/66667
+Length: 42
+Height: 120
+Width: 160
+
+Audiofields:
+Codec: CODEC_TYPE_AUDIO
+CodecID: CODEC_ID_PCM_U8
+Channels: 1
+Samplerate: 22050
+Bitrate: 176400

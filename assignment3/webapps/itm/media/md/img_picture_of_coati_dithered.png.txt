@@ -1,0 +1,13 @@
+type: image
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\img\picture_of_coati_dithered.png
+name: picture_of_coati_dithered.png
+size: 144786 bytes (144kB)
+tags: image,png,red,green,
+width: 1023
+height: 558
+numComponents: 4
+numColorComponents: 3
+transparency: 2
+pixelSize: 4
+orientation: 0
+colorSpaceType: TYPE_RGB

@@ -1,0 +1,9 @@
+type: audio
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\audio\error.wav
+name: error.wav
+size: 288044 bytes (288kB)
+tags: audio,
+duration: 0:3 (mm:ss)
+encoding: PCM_SIGNED
+sample rate: 44100.0
+channels: 1

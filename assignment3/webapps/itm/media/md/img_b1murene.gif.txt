@@ -1,0 +1,13 @@
+type: image
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\img\b1murene.gif
+name: b1murene.gif
+size: 95967 bytes (95kB)
+tags: image,gif,red,green,
+width: 500
+height: 333
+numComponents: 3
+numColorComponents: 3
+transparency: 1
+pixelSize: 8
+orientation: 0
+colorSpaceType: TYPE_RGB

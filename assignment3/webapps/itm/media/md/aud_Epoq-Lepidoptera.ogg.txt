@@ -1,0 +1,14 @@
+type: audio
+file: C:\Users\Ivo\itm_skeleton_a3_SS16\ITM_Ass3\assignment3\webapps\itm\media\audio\Epoq-Lepidoptera.ogg
+name: Epoq-Lepidoptera.ogg
+size: 4357992 bytes (4357kB)
+tags: audio,
+duration: 05:02 (mm:ss)
+encoding: VORBISENC
+sample rate: 44100.0
+channels: 2
+album: Kahvi Collective
+author: Epoq
+title: Lepidoptera
+date: 2002
+comment: http://www.kahvi.org
