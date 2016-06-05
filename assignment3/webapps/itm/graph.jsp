@@ -18,7 +18,6 @@
         <script type="text/javascript" src="js/dracula_graph.js"></script>
     </head>
     <body>
-    <p id="para">hi, i am here</p>
         <%
             // get the file paths - this is NOT good style (resources should be loaded via inputstreams...)
             // we use it here for the sake of simplicity.
@@ -42,8 +41,6 @@
         %>
         <div id="canvas" style="height: 1024px; width: 1024px; margin: auto; display: block; text-align:center;"></div>
         <script>
-        
-        	document.getElementById("para").innerHTML = 5 + 6;
         
             var g = new Graph();
             g.addNode("Tags", "", "/itm/tags.jsp");
