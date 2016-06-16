@@ -132,7 +132,7 @@ public class MediaFactory {
 		// Histogram
 		ImageHistogramGenerator histGenerator = new ImageHistogramGenerator();
 		histGenerator.batchProcessImages(imageDir, metadataDir, 256);
-        
+/*
         // step 2.1: create audio thumbnails (with a given length), do not
         // overwrite if not required
         AudioThumbGenerator atg = new AudioThumbGenerator(10);
@@ -151,7 +151,7 @@ public class MediaFactory {
         VideoMetadataGenerator vmg = new VideoMetadataGenerator();
         ret.addAll( vmg.batchProcessVideoFiles(videoDir, metadataDir, false) );
 		
-        
+*/  
         return ret;
     }
 

@@ -185,10 +185,46 @@ ImageReader reader;
         media.writeToFile(outputFile);
         return media;
     }
+	
+
+private boolean isBlackWhiteGrey(int redRetrieved, int greenRetrieved, int blueRetrieved) {
+	int redGreenDiff = redRetrieved - greenRetrieved;
+	int redBlueDiff = redRetrieved - blueRetrieved;
+	int offset = 8;
+	if( 
+		(redGreenDiff > offset || redGreenDiff < -offset) 
+		&& 
+		(redBlueDiff > offset || redBlueDiff < -offset)
+	  ){
+		return false;
+	}  
+	
+	return true;
+}
     
+
+
+private boolean isDominant(int colorReference, int colorToCompare1, int colorToCompare2,final double FACTOR_COL_DIF){
+	
+	int max = Math.max(Math.max(colorToCompare1, colorToCompare2), colorReference);
+	
+	if(max != colorReference)
+		return false;
+	
+	if(
+		((double)colorReference/(double)colorToCompare1 >= FACTOR_COL_DIF)
+		&&
+		((double)colorReference/(double)colorToCompare2 >= FACTOR_COL_DIF)
+	  )
+		return true;
+	else
+		return false;
+	
+}
         
     private ArrayList<String> calcDominantColors(BufferedImage image) {
     	ArrayList<String> tags = new ArrayList<String>(1);
+    	long totalNumPixels = (long) image.getHeight()*image.getWidth();
     	
     	ColorModel col_mod = image.getColorModel();
     	long redCount = 0, blueCount = 0, greenCount = 0;
@@ -196,6 +232,7 @@ ImageReader reader;
     	try{
     		
 			if (col_mod.getColorSpace().getType() == ColorSpace.TYPE_RGB){
+				final double FACTOR_COL_DIF = 1.15f;
 				for(int i = 0; i < image.getHeight(); i++){
 					for(int j = 0; j < image.getWidth(); j++){
 						// read the pixel values and extract the color information
@@ -203,51 +240,75 @@ ImageReader reader;
 						
 						int redRetrieved = color.getRed();
 						int greenRetrieved = color.getGreen();
-						int blueRetrieved = color.getGreen();
-						
-						if(	(redRetrieved == 255 &&
-							greenRetrieved == 255 &&
-							blueRetrieved == 255) 
-								||
-							(redRetrieved == 0 &&
-							greenRetrieved == 0 &&
-							blueRetrieved == 0) )
-								continue;
+						int blueRetrieved = color.getBlue();
 						
 						
-						redCount += color.getRed();
-						greenCount += color.getGreen();
-						blueCount += color.getBlue();
+						//skip if black, white or grey
+
+						if(isBlackWhiteGrey(redRetrieved, greenRetrieved, blueRetrieved)){
+						//	--totalNumPixels;
+							continue;
+						
+						}	
+
+						
+						//in order to avoid division by 0
+						redRetrieved++;
+						greenRetrieved++;
+						blueRetrieved++;
+
+						//test RED
+						if(isDominant(redRetrieved, greenRetrieved, blueRetrieved, FACTOR_COL_DIF)){
+							redCount++;
+							
+						} 
+						//test GREEN
+						if(isDominant(greenRetrieved, redRetrieved, blueRetrieved, FACTOR_COL_DIF)){
+							greenCount++;
+							
+						} 
+						//test BLUE
+						if(isDominant(blueRetrieved, redRetrieved, greenRetrieved, FACTOR_COL_DIF)){
+							blueCount++;
+						}
+							
 						
 					}
 				}
 				
-				long blueORgreenMax = Math.max(blueCount, greenCount);
-				long max = Math.max(blueORgreenMax, redCount);
 				
-				//adding the most dominant color
-				if(max == blueCount)
+				
+
+				long max = Math.max(Math.max(blueCount, greenCount), redCount);
+				
+				
+				if(max == 0)
+					return tags;
+				
+						
+				
+				float redPerc = ((float) redCount / (float) max) * 100.0f;
+				float bluePerc = ((float) blueCount / (float) max) * 100.0f;
+				float greenPerc = ((float) greenCount / (float) max) * 100.0f;
+				
+
+				
+				System.out.println("redPerc: " + redPerc);
+				System.out.println("redCount: " + redCount);
+				System.out.println("bluePerc: " + bluePerc);
+				System.out.println("blueCount: " + blueCount);
+				System.out.println("greenPerc: " + greenPerc);
+				System.out.println("greenCount: " + greenCount);
+				
+				final float THRESHOLD = 40.0f;
+				//adding colors that are below the threshold (for max it will be 0, so it will be added 
+				//automatically)
+				if(100.0f-bluePerc < THRESHOLD && !tags.contains("blue"))
 					tags.add("blue");
-				else
-					if(max == greenCount)
-						tags.add("green");
-					else 
-						tags.add("red");
-				
-				float redPerc = (max != redCount) ? redCount / (max / 100.0f) : - 1;
-				float bluePerc = (max != blueCount) ? blueCount / (max / 100.0f) : - 1;
-				float greenPerc = (max != greenCount) ? greenCount / (max / 100.0f) : -1;
-				
-				final float THRESHOLD = 10.0f;
-				//adding colors that are below the threshold
-				if(max != blueCount && 100.0f-bluePerc < THRESHOLD)
-					tags.add("blue");
-				else
-					if(max != greenCount && 100.0f-greenPerc < THRESHOLD)
-						tags.add("green");
-					else 
-						if(max != redCount && 100.0f-redPerc < THRESHOLD)
-						tags.add("red");
+				if(100.0f-greenPerc < THRESHOLD && !tags.contains("green"))
+					tags.add("green");
+				if(100.0f-redPerc < THRESHOLD && !tags.contains("red"))
+					tags.add("red");
 				
 				
 				
